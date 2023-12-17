@@ -1,0 +1,272 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/Puddle.gd" type="Script" id=1]
+[ext_resource path="res://Images/Puddle.png" type="Texture" id=2]
+[ext_resource path="res://Images/PuddleLarge.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Puddles.gd" type="Script" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform vec2 scale;
+uniform float saturation :hint_range(0.0, 4) = 1.0;
+
+void fragment(){
+	
+	COLOR = texture(TEXTURE, UV);
+	
+	if (COLOR.a > 0.5) 
+	{
+		float uv_height = SCREEN_PIXEL_SIZE.y / TEXTURE_PIXEL_SIZE.y;
+		vec2 reflected_screenuv = vec2(SCREEN_UV.x, SCREEN_UV.y + .04 * (UV.y * 2.0));
+		
+		COLOR = texture(SCREEN_TEXTURE, reflected_screenuv);
+		
+		
+		mat3 sat_shift = mat3(
+			vec3(1.0,0,0),
+			vec3(0,saturation,0),
+			vec3(0,0,saturation)
+		);
+		
+		vec3 color = COLOR.rgb;
+		
+		mat3 RGB_to_YIQ = mat3(
+			vec3(0.2989,0.5959,0.21115),
+			vec3(0.5870,-0.2774,-.5229),
+			vec3(0.1140,-.03216,0.3114)
+		);
+		
+		color = RGB_to_YIQ * color;
+		//color = sat_shift * color;
+		
+		color = inverse(RGB_to_YIQ) * color;
+		
+		COLOR = vec4(color, 1.0);
+		COLOR.a = 0.5;
+		//COLOR.b = 0.0;
+	}
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 1 )
+shader_param/scale = Vector2( 0.944445, 0.666667 )
+shader_param/saturation = 0.0
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+uniform vec2 scale;
+uniform float saturation :hint_range(0.0, 4) = 1.0;
+
+void fragment(){
+	
+	COLOR = texture(TEXTURE, UV);
+	
+	if (COLOR.a > 0.5) 
+	{
+		float uv_height = SCREEN_PIXEL_SIZE.y / TEXTURE_PIXEL_SIZE.y;
+		vec2 reflected_screenuv = vec2(SCREEN_UV.x, SCREEN_UV.y + .09 * (UV.y * 2.0));
+		
+		COLOR = texture(SCREEN_TEXTURE, reflected_screenuv);
+		
+		
+		mat3 sat_shift = mat3(
+			vec3(1.0,0,0),
+			vec3(0,saturation,0),
+			vec3(0,0,saturation)
+		);
+		
+		vec3 color = COLOR.rgb;
+		
+		mat3 RGB_to_YIQ = mat3(
+			vec3(0.2989,0.5959,0.21115),
+			vec3(0.5870,-0.2774,-.5229),
+			vec3(0.1140,-.03216,0.3114)
+		);
+		
+		color = RGB_to_YIQ * color;
+		//color = sat_shift * color;
+		
+		color = inverse(RGB_to_YIQ) * color;
+		
+		COLOR = vec4(color, 1.0);
+		COLOR.a = 0.5;
+		//COLOR.b = 0.0;
+	}
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 3 )
+shader_param/scale = null
+shader_param/saturation = 1.0
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 395.5, 161.5 )
+
+[node name="PuddleNode" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Puddle" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( -385, 239 )
+scale = Vector2( 0.944445, 0.666667 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Puddle3" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( -900, 239 )
+scale = Vector2( 0.944445, 0.666667 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Puddle4" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( -1000, 239 )
+scale = Vector2( 0.944445, 0.666667 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Puddle5" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( -1700, 239 )
+scale = Vector2( 0.944445, 0.666667 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Puddle6" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 400, 239 )
+scale = Vector2( 0.944445, 0.666667 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Puddle7" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 800, 239 )
+scale = Vector2( 0.944445, 0.666667 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Puddle8" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 1800, 239 )
+scale = Vector2( 0.944445, 0.666667 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Puddle9" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 2100, 239 )
+scale = Vector2( 0.944445, 0.666667 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Puddle10" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 2300, 239 )
+scale = Vector2( 0.944445, 0.666667 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Puddle2" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( -301, 239 )
+scale = Vector2( 0.944445, 0.666667 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PuddleLarge" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( -603, 245.407 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PuddleLarge2" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( -1200, 245.407 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PuddleLarge3" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( -1500, 245.407 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PuddleLarge4" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( -2000, 245.407 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PuddleLarge5" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( 200, 245.407 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PuddleLarge6" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( 600, 245.407 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PuddleLarge7" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( 1100, 245.407 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PuddleLarge8" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( 1500, 245.407 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PuddleLarge9" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( 2500, 245.407 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 2464.5, 161.5 )
+shape = SubResource( 6 )
+
+[connection signal="item_rect_changed" from="Puddle" to="Puddle" method="_on_Puddle_item_rect_changed"]
+[connection signal="item_rect_changed" from="Puddle3" to="Puddle3" method="_on_Puddle_item_rect_changed"]
+[connection signal="item_rect_changed" from="Puddle4" to="Puddle4" method="_on_Puddle_item_rect_changed"]
+[connection signal="item_rect_changed" from="Puddle5" to="Puddle5" method="_on_Puddle_item_rect_changed"]
+[connection signal="item_rect_changed" from="Puddle6" to="Puddle6" method="_on_Puddle_item_rect_changed"]
+[connection signal="item_rect_changed" from="Puddle7" to="Puddle7" method="_on_Puddle_item_rect_changed"]
+[connection signal="item_rect_changed" from="Puddle8" to="Puddle8" method="_on_Puddle_item_rect_changed"]
+[connection signal="item_rect_changed" from="Puddle9" to="Puddle9" method="_on_Puddle_item_rect_changed"]
+[connection signal="item_rect_changed" from="Puddle10" to="Puddle10" method="_on_Puddle_item_rect_changed"]
+[connection signal="item_rect_changed" from="Puddle2" to="Puddle2" method="_on_Puddle_item_rect_changed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
