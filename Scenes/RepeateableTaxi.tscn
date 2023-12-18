@@ -60,7 +60,8 @@ __meta__ = {
 }
 
 [node name="MoonMist" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
-position = Vector2( 400, 70 )
+modulate = Color( 1, 1, 1, 0.623529 )
+position = Vector2( 500, 30 )
 texture = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true

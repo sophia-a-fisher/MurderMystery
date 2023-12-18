@@ -8,17 +8,21 @@ var instance_count = 1
 var instance
 var old_instance
 var older_instance
+var fade_timer = 0
+var noise_setup = false
 #var last_instance
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	$AnimationPlayer.play("FadeIn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	fade_timer += delta
+	if(fade_timer > 0.5) && !noise_setup:
+		$RainNoise.play()
+		noise_setup = true
 
 func create_new_instance():
 	print("created instance at" + str(-5100*instance_count))

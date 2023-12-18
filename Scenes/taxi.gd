@@ -8,15 +8,21 @@ var speed = 170;
 var deer_scene = preload("res://Scenes/deerhead.tscn")
 var old_instance
 var instance
+var fade_timer = 0;
+var noise_setup = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$AnimationPlayer.play("FadeIn")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position.x -= (speed * delta);
+	fade_timer += delta
+	if(fade_timer > 0.5) && !noise_setup:
+		$Gravels.play()
+		noise_setup = true
 	#if position.x < -1000:
 	#	position.x = 300
 		
