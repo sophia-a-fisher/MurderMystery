@@ -13,22 +13,24 @@ func _ready():
 	bitmapFont.height = 23
 	
 	var startC : int = ord("A")
-	var endC : int = startC + 57
+	var endC : int = startC + 58
 	var ascii_val
 	
 	for i in range(startC, endC):
 		if(i < 91):
 			ascii_val = i
+		elif(i == 122):
+			ascii_val = 44 #,
 		elif(i == 121):
-			ascii_val = 39
+			ascii_val = 39 #'
 		elif(i == 120):
-			ascii_val = 63
+			ascii_val = 63 #?
 		elif(i == 119):
-			ascii_val = 33
+			ascii_val = 33 #!
 		elif(i == 118):
-			ascii_val = 46
+			ascii_val = 46 #.
 		elif(i == 117):
-			ascii_val = 32
+			ascii_val = 32 #space
 		else:
 			ascii_val = i + 6
 		var c = i - 65
@@ -134,8 +136,14 @@ func _ready():
 	bitmapFont.add_kerning_pair(ord("W"),ord("e"),1)
 	bitmapFont.add_kerning_pair(ord("e"),ord("'"),4)
 	bitmapFont.add_kerning_pair(ord("'"),ord("l"),5)
+	bitmapFont.add_kerning_pair(ord("f"),ord("f"),3)
+	bitmapFont.add_kerning_pair(ord("'"),ord("r"),4)
+	bitmapFont.add_kerning_pair(ord("G"),ord("u"),-1)
+	bitmapFont.add_kerning_pair(ord("u"),ord("y"),2)
+	bitmapFont.add_kerning_pair(ord("s"),ord("s"),2)
 	
 	bitmapFont.add_kerning_pair(ord("r"),ord("?"),3)
+	bitmapFont.add_kerning_pair(ord("l"),ord(","),5)
 	
 	bitmapFont.add_kerning_pair(ord("s"),ord("."),4)
 	bitmapFont.add_kerning_pair(ord("l"),ord("."),4)
@@ -154,14 +162,16 @@ func _ready():
 	bitmapFont.add_kerning_pair(ord("m"),ord(" "),5)
 	bitmapFont.add_kerning_pair(ord("a"),ord(" "),6)
 	bitmapFont.add_kerning_pair(ord("s"),ord(" "),6)
-	bitmapFont.add_kerning_pair(ord("e"),ord(" "),7)
+	bitmapFont.add_kerning_pair(ord("e"),ord(" "),6)
 	bitmapFont.add_kerning_pair(ord("g"),ord(" "),6)
 	bitmapFont.add_kerning_pair(ord("d"),ord(" "),3)
 	bitmapFont.add_kerning_pair(ord("o"),ord(" "),6)
 	bitmapFont.add_kerning_pair(ord("u"),ord(" "),6)
 	bitmapFont.add_kerning_pair(ord("."),ord(" "),3)
 	bitmapFont.add_kerning_pair(ord("l"),ord(" "),4)
-	
+	bitmapFont.add_kerning_pair(ord("k"),ord(" "),3)
+	bitmapFont.add_kerning_pair(ord("f"),ord(" "),4)
+	bitmapFont.add_kerning_pair(ord(","),ord(" "),3)
 	
 	var resource_path: String = "res://MyBitMapFont.res"
 	if(ResourceSaver.save(resource_path, bitmapFont) == OK): 

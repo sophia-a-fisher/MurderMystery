@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Images/Taxi.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/taxi.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Sounds/Gravels.wav" type="AudioStream" id=4]
 [ext_resource path="res://Images/Headlights.png" type="Texture" id=5]
 [ext_resource path="res://Images/RedLight.png" type="Texture" id=6]
+[ext_resource path="res://Sounds/Car_Turn_Off.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 62, 27 )
@@ -13,6 +14,22 @@ extents = Vector2( 62, 27 )
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0.592179, 0.932961, 1 )
 colors = PoolColorArray( 0.344096, 0.330497, 0.294363, 1, 0.6757, 0.436932, 0.129333, 0.333333, 0.761637, 0.539308, 0.252887, 0 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "Fade Out"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Gravels:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -25.971 ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "FadeIn"
@@ -129,8 +146,17 @@ wait_time = 10.0
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Fade Out" = SubResource( 5 )
 anims/FadeIn = SubResource( 3 )
 anims/RESET = SubResource( 4 )
 
+[node name="Car_Stop_Timer" type="Timer" parent="."]
+wait_time = 2.358
+
+[node name="CarStop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
 [connection signal="timeout" from="Timer" to="Camera2D" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
+[connection signal="timeout" from="Car_Stop_Timer" to="." method="_on_Car_Stop_Timer_timeout"]
+[connection signal="finished" from="CarStop" to="." method="_on_CarStop_finished"]

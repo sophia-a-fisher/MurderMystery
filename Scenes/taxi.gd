@@ -26,7 +26,9 @@ func _process(delta):
 	#if position.x < -1000:
 	#	position.x = 300
 		
-
+func fade_taxi():
+	$AnimationPlayer.play("Fade Out")
+	$Car_Stop_Timer.start()
 
 func _on_Timer2_timeout():
 	old_instance = instance
@@ -38,3 +40,11 @@ func _on_Timer2_timeout():
 		old_instance.queue_free()
 		
 	$Timer2.wait_time = rand_range(6,13)
+
+
+func _on_Car_Stop_Timer_timeout():
+	$CarStop.play()
+
+
+func _on_CarStop_finished():
+	get_parent().get_parent().switch_to_outside_scene()
